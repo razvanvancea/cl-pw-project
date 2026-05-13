@@ -1,27 +1,35 @@
 name: Playwright Tests
+
 on:
   push:
     branches: [main, master]
   pull_request:
     branches: [main, master]
   # schedule:
-  #   - cron: '30 16 3 * *' # At 03:00 on Monday
+  #   - cron: '30 16 3 * *'
+
 jobs:
   e2e-tests:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+
     strategy:
       fail-fast: false
       matrix:
         shardIndex: [1, 2, 3, 4]
         shardTotal: [4]
+
     steps:
       - uses: actions/checkout@v5
+
       - uses: actions/setup-node@v5
         with:
           node-version: lts/*
+          cache: npm
+
       - name: Install dependencies
         run: npm ci
+
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
 
@@ -30,28 +38,30 @@ jobs:
 
       - name: Upload blob report to GitHub Actions Artifacts
         if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: blob-report-${{ matrix.shardIndex }}
           path: blob-report
           retention-days: 1
 
   merge-reports:
-    # Merge reports after playwright-tests, even if some shards have failed
     if: ${{ !cancelled() }}
     needs: [e2e-tests]
-
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v5
+
       - uses: actions/setup-node@v5
         with:
           node-version: lts/*
+          cache: npm
+
       - name: Install dependencies
         run: npm ci
 
       - name: Download blob reports from GitHub Actions Artifacts
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v7
         with:
           path: all-blob-reports
           pattern: blob-report-*
@@ -61,7 +71,7 @@ jobs:
         run: npx playwright merge-reports --reporter html ./all-blob-reports
 
       - name: Upload HTML report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: html-report--attempt-${{ github.run_attempt }}
           path: playwright-report
@@ -71,21 +81,30 @@ jobs:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     container: mcr.microsoft.com/playwright:v1.56.1-noble
+
     env:
       HOME: /root
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
         with:
           node-version: lts/*
+          cache: npm
+
       - name: Install dependencies
         run: npm ci
+
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
+
       - name: Run Playwright tests
         run: npm run test:visual
-      - uses: actions/upload-artifact@v4
+
+      - name: Upload visual report
         if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v6
         with:
           name: playwright-report-visual
           path: playwright-report/
