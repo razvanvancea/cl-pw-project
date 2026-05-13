@@ -38,12 +38,19 @@ npm install
 # 🧪 Running tests
 
 ## Run E2E tests in headless mode
-
+```bash
 npm run test:e2e
 
-## Run visual regression tests (inside Docker)
+```
 
+
+
+## Run visual regression tests (inside Docker)
+```bash
 npm run test:visual
+
+```
+
 
 ## 🧪 CI/CD
 
@@ -69,7 +76,11 @@ To be added: custom agents (code-reviewer-specialist, etc)
 ## Dynamic URL
 
 I added cross-env package to handle dynamic URL (prod, dev, stg) passed directly from the CLI. Otherwise, a hardcoded app URL will be used as fallback (it is set in the pw config files).
-e.g. npx cross-env BASE_URL=https://test-qa.capslock.global playwright test
+
+```bash
+npx cross-env BASE_URL=https://test-qa.capslock.global playwright test
+
+```
 
 ## Random data generator - faker
 
@@ -95,11 +106,11 @@ If the application contains login flows, then a global auth login flow should ha
 3. visual test: validate the thank you page design
 
 ## Potential defects report format
-If I had to document a defect, I would have inserted the following information
-Title
-Description
-Reproduction steps
-Actual results
-Expected results
-Priority and Severity levels
-Attachments (gif, image, logs, recording)
+If I had to document a defect, I would have inserted the following information:
+- Title
+- Description
+- Reproduction steps
+- Actual results
+- Expected results
+- Priority and Severity levels
+- Attachments (gif, image, logs, recording)
