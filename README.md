@@ -50,7 +50,7 @@ npm run test:visual
 
 ## 🧪 CI/CD
 
-GitHub Actions, with:
+GitHub Actions pipelines enabled, with:
 - 4 parallel web e2e jobs
 - 1 visual tests job
 
