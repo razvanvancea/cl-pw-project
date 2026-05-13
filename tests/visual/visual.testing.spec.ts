@@ -5,8 +5,16 @@ test.describe('Visual tests test suite', () => {
     await page.goto(`/`);
   });
 
-  test('visual test: validate the thank you page design', async ({ registrationFormPage, page }) => {
-    await registrationFormPage.completeRegistration('68901', 'john doe', 'jd@gmail.com', '0765666666');
+  test('visual test: validate the thank you page design', async ({
+    registrationFormPage,
+    page,
+  }) => {
+    await registrationFormPage.completeRegistration(
+      '68901',
+      'john doe',
+      'jd@gmail.com',
+      '0765666666'
+    );
 
     await expect(page.getByRole('heading')).toContainText('Thank you!');
 

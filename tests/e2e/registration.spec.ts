@@ -1,24 +1,34 @@
 import { test, expect } from '../../custom-page-fixture';
+import { faker } from '@faker-js/faker';
 
 test.describe('Registration test suite', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto(`/`);
   });
 
-  test('the user should be able to register successfully @db', async ({ registrationFormPage, page }) => {
-    // Complete the registration form with all required information
-    await registrationFormPage.completeRegistration('68901', 'john doe', 'jd@gmail.com', '0765666666');
+  test('the user should be able to register successfully @db', async ({
+    registrationFormPage,
+    page,
+  }) => {
+    const randomfullName = `John ${faker.person.lastName()}`;
+    const randomEmail = faker.internet.email();
 
-    // Verify the thank you page is displayed
+    await registrationFormPage.completeRegistration(
+      '68901',
+      randomfullName,
+      randomEmail,
+      '0765666666'
+    );
+
     await expect(page.getByRole('heading')).toContainText('Thank you!');
   });
 
-  test('the user should see an error message for an invalid ZIP code', async ({ registrationFormPage }) => {
-    // Enter an invalid ZIP code
+  test('the user should see an error message for an invalid ZIP code', async ({
+    registrationFormPage,
+  }) => {
     await registrationFormPage.enterZipCode('123');
     await registrationFormPage.clickNext();
 
-    // Verify the error message is displayed
     await expect(registrationFormPage.formContainer).toContainText('Wrong ZIP code.');
   });
 });
