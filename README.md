@@ -38,19 +38,18 @@ npm install
 # 🧪 Running tests
 
 ## Run E2E tests in headless mode
+
 ```bash
 npm run test:e2e
 
 ```
 
-
-
 ## Run visual regression tests (inside Docker)
+
 ```bash
 npm run test:visual
 
 ```
-
 
 ## 🧪 CI/CD
 
@@ -99,14 +98,18 @@ Adding in the pipeline a new job 'check-branch-up-to-date-with-main' to fail and
 
 If the application contains login flows, then a global auth login flow should have been included in the framework to bypass login for each test (it will go through login just once, save browser cookies into a json file then inject the file into each and every browser session used by each test).
 
-
 # User scenarios included in the automation test suite
+
 1. the user should be able to register successfully - we always need to start with the happy paths focusing on end to end scenarios
 2. the user should see an error message for an invalid ZIP code - invalid scenario to make sure the user gets notified when inserts invalid code format
-3. visual test: validate the thank you page design
+3. the user should include in Name field both first name and last name
+4. the user should see an error message for an empty Name field
+5. visual test: validate the thank you page design
 
 ## Potential defects report format
+
 If I had to document a defect, I would have inserted the following information:
+
 - Title
 - Description
 - Reproduction steps
