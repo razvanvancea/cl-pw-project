@@ -1,0 +1,25 @@
+{
+  "name": "capslock-homework-rv",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "format": "npx oxfmt",
+    "test:e2e": "npx cross-env BASE_URL=https://test-qa.capslock.global playwright test",
+    "test:visual": "npx cross-env BASE_URL=https://test-qa.capslock.global playwright test --config=playwright.visual.config.ts",
+    "test:visual:update": "npx cross-env BASE_URL=https://test-qa.capslock.global playwright test --config=playwright.visual.config.ts --update-snapshots",
+    "open:report": "npx playwright show-report"
+  },
+  "keywords": [],
+  "author": "Razvan Vancea",
+  "license": "ISC",
+  "devDependencies": {
+    "@axe-core/playwright": "^4.11.0",
+    "@faker-js/faker": "^10.1.0",
+    "@playwright/test": "^1.56.1",
+    "@types/node": "^24.9.2",
+    "cross-env": "^10.1.0",
+    "dotenv": "^17.2.3",
+    "oxfmt": "^0.49.0",
+    "prettier": "^3.6.2"
+  }
+}
