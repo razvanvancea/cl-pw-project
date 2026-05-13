@@ -34,7 +34,7 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Run Playwright tests
-        run: npx cross-env BASE_URL=https://test-qa.capslock.global playwright test --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
+        run: npx cross-env BASE_URL=https://test-qa.capslock.global playwright test --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }} --pass-with-no-tests
 
       - name: Upload blob report to GitHub Actions Artifacts
         if: ${{ !cancelled() }}

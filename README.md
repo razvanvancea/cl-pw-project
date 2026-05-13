@@ -1,7 +1,6 @@
 # Playwright Boilerplate - Final Project
 
-This is the final project for the **Test Automation Incubator** program:  
-👉 [https://tai.razvanvancea.ro/](https://tai.razvanvancea.ro/)
+Project built for CapsLock assessment
 
 The project is built using **Playwright** and includes several types of automated tests, covering different aspects of a web application.
 
@@ -72,3 +71,5 @@ To be added: custom agents (code-reviewer-specialist, etc)
 ## Other potential improvements
 
 Adding accessibility layer using axe-core or adding API test automation layer if it applies to the application under test.
+
+Other visual tests may require mask property based on a selector to ignore dynamic sections from the web page.
